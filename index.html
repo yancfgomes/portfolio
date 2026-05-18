@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<!-- ============================================
+     PORTFÓLIO DE YAN FERNANDES - ANÁLISE DE DADOS
+     ============================================ -->
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yan Fernandes | Portfólio de Dados</title>
+    
+    <!-- DEPENDÊNCIAS EXTERNAS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- ESTILOS CUSTOMIZADOS -->
+    <style>
+        /* Camada de brilho suave para dar profundidade ao fundo da página. */
+        .glow-bg {
+            position: relative;
+        }
+        /* Círculo difuso posicionado no canto superior direito do layout. */
+        .glow-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 40vw;
+            height: 40vw;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, rgba(11, 11, 15, 0) 70%);
+            border-radius: 50%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Animação usada para revelar os blocos ao entrarem na viewport. */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        /* Estado final da animação quando o elemento fica visível. */
+        .fade-in.in-view {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="bg-[#0B0B0F] text-slate-100 font-sans antialiased glow-bg selection:bg-[#F09F38] selection:text-black overflow-x-hidden">
+
+    <!-- Cabeçalho fixo com navegação principal, CTA e menu mobile. -->
+    <header id="main-header" class="fixed w-full top-0 z-50 backdrop-blur-xl bg-[#0B0B0F]/80 border-b border-white/5 transition-all duration-300">
+        <!-- Barra superior com marca, links de navegação e ações rápidas. -->
+        <nav class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between relative z-50">
+            <span class="text-xl font-bold tracking-wider text-white flex items-center gap-2">
+                <div class="w-2 h-2 rounded-full bg-[#F09F38]"></div>
+                Portfólio
+            </span>
+            
+            <div class="hidden md:flex items-center gap-6 text-sm text-slate-400 font-medium">
+                <a href="#sobre" class="hover:text-white transition">Sobre</a>
+                <a href="#habilidades" class="hover:text-white transition">Habilidades</a>
+                <a href="#projetos" class="hover:text-white transition">Projetos</a>
+                <a href="#formacao" class="hover:text-white transition">Formação</a>
+            </div>
+
+            <div class="flex items-center gap-3">
+                <a href="assets/yancfgomes_cv.pdf" download="Curriculo_Yan_Fernandes.pdf" class="hidden sm:flex bg-white/5 text-slate-300 border border-white/10 px-4 py-1.5 rounded-full font-medium hover:bg-white/10 hover:text-white transition text-xs items-center gap-1.5">
+        <!-- Menu sobreposto exibido apenas em telas pequenas. -->
+                    CV <i data-lucide="download" class="w-3.5 h-3.5"></i>
+                </a>
+                <a href="#contato" class="hidden md:inline-flex bg-[#F09F38] text-black px-5 py-1.5 rounded-full font-bold hover:bg-[#F5B461] hover:scale-105 transition-all duration-300 text-xs shadow-[0_0_15px_rgba(240,159,56,0.3)]">Contato</a>
+                
+                <button id="mobile-menu-btn" class="md:hidden p-2 text-slate-300 hover:text-white focus:outline-none transition-colors">
+                    <i id="icon-menu" data-lucide="menu" class="w-6 h-6"></i>
+                    <i id="icon-x" data-lucide="x" class="w-6 h-6 hidden"></i>
+                </button>
+            </div>
+        </nav>
+
+        <div id="mobile-menu" class="fixed inset-0 bg-[#0B0B0F] z-40 flex flex-col items-center pt-28 pb-10 gap-6 opacity-0 pointer-events-none transition-opacity duration-300 overflow-y-auto">
+            <a href="#sobre" class="mobile-link text-2xl font-bold text-slate-300 hover:text-white transition">Sobre</a>
+            <a href="#habilidades" class="mobile-link text-2xl font-bold text-slate-300 hover:text-white transition">Habilidades</a>
+            <a href="#projetos" class="mobile-link text-2xl font-bold text-slate-300 hover:text-white transition">Projetos</a>
+            <a href="#formacao" class="mobile-link text-2xl font-bold text-slate-300 hover:text-white transition">Formação</a>
+            <a href="#contato" class="mobile-link text-2xl font-extrabold text-[#F09F38] hover:text-[#F5B461] transition mt-2">Contato</a>
+            
+            <a href="assets/yancfgomes_cv.pdf" download="Curriculo_Yan_Fernandes.pdf" class="mobile-link mt-6 bg-white/5 text-white border border-white/10 px-8 py-3 rounded-full font-medium hover:bg-white/10 transition flex items-center gap-2">
+                Baixar CV <i data-lucide="download" class="w-5 h-5"></i>
+            </a>
+        </div>
+    </header>
+
+    <!-- Seção de destaque com apresentação inicial e chamada para ação. -->
+    <section class="w-full pt-32 pb-20 md:pt-40 md:pb-28 bg-gradient-to-b from-violet-950/20 via-[#0B0B0F] to-[#0B0B0F] relative overflow-hidden">
+        <!-- Elemento decorativo do canto inferior esquerdo para reforçar o tema visual. -->
+        <div class="absolute left-0 bottom-10 opacity-[0.03] md:opacity-5 pointer-events-none z-0">
+            <svg width="300" height="300" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10 140 H130 M15 130 L45 80 L75 95 L105 35" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="45" cy="80" r="4" fill="#F09F38"/>
+                <circle cx="75" cy="95" r="4" fill="#F09F38"/>
+                <circle cx="105" cy="35" r="4" fill="#F09F38"/>
+            </svg>
+        </div>
+
+        <!-- Container principal do hero com texto à esquerda e foto à direita. -->
+        <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12 relative z-10">
+            
+            <!-- Bloco textual principal com status, nome e links sociais. -->
+            <div class="w-full md:flex-1 flex flex-col text-center md:text-left fade-in in-view">
+                
+                <div class="space-y-4">
+                    <!-- Badge de disponibilidade para comunicar status profissional. -->
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-medium text-slate-300 mb-2 justify-center md:justify-start">
+                        <span class="relative flex h-2 w-2">
+                          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                          <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                        </span>
+                        Disponível para novos desafios
+                    </div>
+                    <!-- Título principal da página. -->
+                    <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight text-white leading-tight">
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#F09F38] to-[#F5B461]">Yan</span> Fernandes
+                    </h1>
+                    <!-- Texto de apoio com certificação e link externo. -->
+                    <p class="text-lg md:text-xl text-slate-400 max-w-xl leading-relaxed flex items-center justify-center md:justify-start gap-2 flex-wrap">
+                        Analista de Dados certificado pela 
+                        <a href="https://www.credly.com/badges/e864f7b4-b35f-4fbe-bfef-42dd02e562c7/public_url" target="_blank" class="text-white hover:bg-white/10 transition font-medium inline-flex items-center gap-1.5 bg-white/5 px-2.5 py-1 rounded-md border border-white/10 shadow-sm">
+                            <svg class="w-4 h-4" viewBox="0 0 24 24" width="16" height="16" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                                <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                                <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" fill="#FBBC05"/>
+                                <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+                            </svg>
+                            Google
+                        </a>
+                    </p>
+                </div>
+                
+                <!-- Foto reduzida para mobile, mantendo foco no conteúdo principal. -->
+                <div class="md:hidden relative flex justify-center items-center my-10">
+                    <div class="absolute inset-0 bg-violet-600/30 rounded-full blur-[80px]"></div>
+                    <div class="w-64 h-64 rounded-full border border-white/10 p-2 relative bg-[#030303]/50 z-10 group hover:border-[#F09F38]/50 transition-colors duration-500">
+                        <img src="assets/Gemini_Generated_Image_s1za90s1za90s1za.png" alt="Yan Fernandes" class="w-full h-full object-cover rounded-full filter grayscale-[20%] group-hover:grayscale-0 transition duration-500">
+                    </div>
+                </div>
+
+                <!-- Botões de ação e atalhos para projetos e redes sociais. -->
+                <div class="pt-2 md:pt-8 flex flex-wrap items-center justify-center md:justify-start gap-4">
+                    <a href="#projetos" class="inline-flex items-center gap-2 bg-[#F09F38] text-black px-7 py-3.5 rounded-full font-bold hover:bg-[#F5B461] transition group text-sm shadow-[0_0_20px_rgba(240,159,56,0.2)]">
+                        Ver Projetos
+                        <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition"></i>
+                    </a>
+                    
+                    <div class="flex items-center gap-3 md:ml-2">
+                        <a href="https://www.linkedin.com/in/yancfgomes/" target="_blank" class="p-3 bg-white/5 border border-white/10 hover:border-[#F09F38]/50 hover:text-[#F09F38] hover:bg-[#F09F38]/5 rounded-full text-slate-300 transition duration-300 group" aria-label="LinkedIn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:scale-110 transition"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                        </a>
+                        <a href="https://github.com/yancfgomes" target="_blank" class="p-3 bg-white/5 border border-white/10 hover:border-[#F09F38]/50 hover:text-[#F09F38] hover:bg-[#F09F38]/5 rounded-full text-slate-300 transition duration-300 group" aria-label="GitHub">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:scale-110 transition"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+         
+            <!-- Foto principal em telas médias e grandes. -->
+            <div class="hidden md:flex relative justify-center items-center fade-in in-view">
+                <div class="absolute inset-0 bg-violet-600/30 rounded-full blur-[80px]"></div>
+                <div class="w-80 h-80 rounded-full border border-white/10 p-2 relative bg-[#030303]/50 z-10 group hover:border-[#F09F38]/50 transition-colors duration-500">
+                    <img src="assets/Gemini_Generated_Image_s1za90s1za90s1za.png" alt="Yan Fernandes" class="w-full h-full object-cover rounded-full filter grayscale-[20%] group-hover:grayscale-0 transition duration-500">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Conteúdo principal com as seções institucionais e de portfólio. -->
+    <main class="w-full">
+        
+        <!-- Seção sobre mim com resumo profissional e imagem de apoio. -->
+        <section id="sobre" class="w-full py-24 bg-[#0B0B0F] relative scroll-mt-16">
+            <div class="max-w-6xl mx-auto px-6 space-y-12">
+                <div class="flex items-center gap-4 fade-in">
+                    <div class="w-8 h-[2px] bg-[#F09F38]"></div>
+                    <h2 class="text-3xl font-bold tracking-wide uppercase text-white">Sobre mim</h2>
+                </div>
+
+                <!-- Duas colunas: texto descritivo e imagem ilustrativa. -->
+                <div class="grid gap-12 md:grid-cols-2 items-center fade-in">
+                    <div class="space-y-6 text-slate-400 leading-relaxed text-lg">
+                        <p>
+                            Sou <span class="text-white font-semibold">Profissional de Dados</span> com formação em <span class="text-white font-medium">Análise e Desenvolvimento de Sistemas</span> e certificado em <span class="text-[#F09F38] font-medium">Google Data Analytics</span>. Unindo minha sólida bagagem em infraestrutura de TI e processos operacionais, atuo focado em transformar dados brutos em soluções estruturadas que geram valor estratégico e apoiam a tomada de decisão.
+                        </p>
+                        <p>
+                            Minha especialidade é a inteligência e análise de dados aplicada ao negócio. Utilizo <span class="text-white font-medium">SQL</span> para consultas e modelagem dimensional, <span class="text-white font-medium">Power Query</span> para limpeza e transformação (ETL), e o <span class="text-white font-medium">Power BI</span> para a construção de dashboards executivos refinados. 
+                        </p>
+                        <p>
+                            Minha trajetória técnica me deu uma mentalidade analítica aguçada para investigar falhas na raiz, identificar padrões de comportamento e traduzir métricas complexas em <span class="text-[#F09F38] font-medium">insights claros e acionáveis</span> para as áreas de negócio.
+                        </p>
+                    </div>
+
+                    <div class="flex justify-center md:justify-end relative group">
+                        <div class="absolute inset-0 bg-violet-600/10 rounded-2xl blur-2xl group-hover:bg-[#F09F38]/10 transition duration-500 max-w-md w-full md:right-0"></div>
+                        <div class="w-full max-w-md rounded-2xl border border-white/10 p-2 bg-white/[0.02] relative z-10 group-hover:border-[#F09F38]/30 transition duration-500">
+                            <img src="assets/photo-1666875753105-c63a6f3bdc86.avif" alt="Exemplo de dashboard" class="w-full rounded-xl shadow-2xl object-cover h-64 filter brightness-90 group-hover:brightness-100 transition duration-500">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção de habilidades técnicas e ferramentas mais usadas. -->
+        <section id="habilidades" class="w-full py-24 bg-white/[0.02] border-y border-white/5 relative scroll-mt-16">
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-violet-900/10 blur-[120px] rounded-full pointer-events-none"></div>
+            
+            <div class="max-w-6xl mx-auto px-6 space-y-12 relative z-10">
+                <div class="flex items-center gap-4 fade-in">
+                    <div class="w-8 h-[2px] bg-[#F09F38]"></div>
+                    <h2 class="text-3xl font-bold tracking-wide uppercase text-white">Principais Habilidades</h2>
+                </div>
+                
+                <!-- Grade de cards, cada um representando uma competência. -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
+                    <div class="p-6 bg-[#0B0B0F] border border-white/5 rounded-2xl space-y-4 hover:border-[#F09F38]/50 hover:-translate-y-1 transition-all duration-300 fade-in shadow-lg">
+                        <div class="w-12 h-12 rounded-full bg-[#F09F38]/10 flex items-center justify-center">
+                            <i data-lucide="bar-chart-3" class="w-6 h-6 text-[#F09F38]"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-white mb-1">Power BI</h3>
+                            <p class="text-xs text-slate-400 leading-relaxed">Dashboards executivos, modelagem e relatórios dinâmicos.</p>
+                        </div>
+                    </div>
+                    <div class="p-6 bg-[#0B0B0F] border border-white/5 rounded-2xl space-y-4 hover:border-[#F09F38]/50 hover:-translate-y-1 transition-all duration-300 fade-in shadow-lg" style="transition-delay: 50ms;">
+                        <div class="w-12 h-12 rounded-full bg-[#F09F38]/10 flex items-center justify-center">
+                            <i data-lucide="database" class="w-6 h-6 text-[#F09F38]"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-white mb-1">SQL</h3>
+                            <p class="text-xs text-slate-400 leading-relaxed">Consultas complexas, Joins, agregações e manipulação.</p>
+                        </div>
+                    </div>
+                    <div class="p-6 bg-[#0B0B0F] border border-white/5 rounded-2xl space-y-4 hover:border-[#F09F38]/50 hover:-translate-y-1 transition-all duration-300 fade-in shadow-lg" style="transition-delay: 100ms;">
+                        <div class="w-12 h-12 rounded-full bg-[#F09F38]/10 flex items-center justify-center">
+                            <i data-lucide="sheet" class="w-6 h-6 text-[#F09F38]"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-white mb-1">Excel & Sheets</h3>
+                            <p class="text-xs text-slate-400 leading-relaxed">Fórmulas complexas, tabelas dinâmicas e relatórios.</p>
+                        </div>
+                    </div>
+                    <div class="p-6 bg-[#0B0B0F] border border-white/5 rounded-2xl space-y-4 hover:border-[#F09F38]/50 hover:-translate-y-1 transition-all duration-300 fade-in shadow-lg" style="transition-delay: 150ms;">
+                        <div class="w-12 h-12 rounded-full bg-[#F09F38]/10 flex items-center justify-center">
+                            <i data-lucide="code-2" class="w-6 h-6 text-[#F09F38]"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-white mb-1">Python</h3>
+                            <p class="text-xs text-slate-400 leading-relaxed">Análise exploratória, limpeza e tratamento de dados.</p>
+                        </div>
+                    </div>
+                    <div class="p-6 bg-[#0B0B0F] border border-white/5 rounded-2xl space-y-4 hover:border-[#F09F38]/50 hover:-translate-y-1 transition-all duration-300 fade-in shadow-lg" style="transition-delay: 200ms;">
+                        <div class="w-12 h-12 rounded-full bg-[#F09F38]/10 flex items-center justify-center">
+                            <i data-lucide="layers" class="w-6 h-6 text-[#F09F38]"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-white mb-1">ETL & DAX</h3>
+                            <p class="text-xs text-slate-400 leading-relaxed">Transformação no Power Query e métricas avançadas.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção com projetos selecionados e links de referência. -->
+        <section id="projetos" class="w-full py-24 bg-[#0B0B0F] relative scroll-mt-16">
+            <div class="max-w-6xl mx-auto px-6 space-y-12">
+                <div class="flex items-center gap-4 fade-in">
+                    <div class="w-8 h-[2px] bg-[#F09F38]"></div>
+                    <h2 class="text-3xl font-bold tracking-wide uppercase text-white">Projetos em Destaque</h2>
+                </div>
+
+                <!-- Card único do projeto atual, centralizado para destacar o foco do portfólio. -->
+                <div class="max-w-3xl mx-auto">
+                    <div class="bg-white/[0.02] border border-white/5 rounded-3xl overflow-hidden flex flex-col group hover:border-[#F09F38]/40 hover:bg-white/[0.04] hover:-translate-y-2 transition-all duration-300 shadow-lg fade-in">
+                        <div class="h-48 bg-gradient-to-br from-[#F09F38]/20 to-[#0B0B0F] flex items-center justify-center relative overflow-hidden">
+                            <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjZmZmIiBmaWxsLW9wYWNpdHk9IjAuMDUiLz4KPC9zdmc+')] opacity-30"></div>
+                            <!-- Thumbnail do dashboard (imagem real) -->
+                            <img src="assets/thumb_estresse.png" alt="Thumbnail Análise de Estresse e Bem-Estar" class="w-full h-full object-cover relative z-10" />
+                        </div>
+                        <div class="p-8 md:p-10 space-y-6 flex-1 flex flex-col justify-between">
+                            <div class="space-y-3">
+                                <h3 class="text-xl font-bold text-white group-hover:text-[#F09F38] transition duration-300">Análise de Estresse e Bem-Estar</h3>
+                                <p class="text-sm text-slate-400 leading-relaxed">Solução analítica interativa que correlaciona o tempo em redes sociais com níveis de estresse, qualidade de sono e desempenho. Desenvolvido com modelagem de dados e métricas avançadas em DAX no Power BI.</p>
+                            </div>
+                            <div class="space-y-5">
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="text-[11px] font-semibold px-2.5 py-1 bg-[#0B0B0F] border border-white/10 rounded-md text-slate-300">Power BI</span>
+                                    <span class="text-[11px] font-semibold px-2.5 py-1 bg-[#0B0B0F] border border-white/10 rounded-md text-slate-300">DAX</span>
+                                    <span class="text-[11px] font-semibold px-2.5 py-1 bg-[#0B0B0F] border border-white/10 rounded-md text-slate-300">Power Query</span>
+                                </div>
+                                <div class="flex flex-wrap gap-4">
+                                    <a href="https://app.powerbi.com/view?r=eyJrIjoiZGEwZjViMTQtMDY5Ny00NGEyLWE1NTEtYjhkOGUyMTcyYTBjIiwidCI6ImQ3ZGNiNWIxLWNlMDAtNDgwOC04YmQxLWU3N2ZkYmY4ZDMxNyJ9&pageName=f2ee2cdad7ae650b1fa0" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-[#F09F38] text-black px-4 py-2 rounded-full font-bold hover:bg-[#F5B461] transition duration-200">
+                                        <i data-lucide="external-link" class="w-4 h-4"></i>
+                                        <span class="hidden sm:inline">Dashboard</span>
+                                        <span class="sm:hidden">Dashboard</span>
+                                    </a>
+                                    <a href="https://github.com/yancfgomes/analise-estresse-bem-estar-alunos" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-[#F09F38] text-black px-4 py-2 rounded-full font-bold hover:bg-[#F5B461] transition duration-200">
+                                        <!-- GitHub mark SVG replacing emoji for clearer branding -->
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-4 h-4" fill="currentColor" aria-hidden="true">
+                                            <path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.87-1.54-3.87-1.54-.52-1.31-1.27-1.66-1.27-1.66-1.04-.71.08-.7.08-.7 1.15.08 1.75 1.18 1.75 1.18 1.02 1.74 2.68 1.24 3.33.95.1-.74.4-1.24.73-1.53-2.56-.29-5.25-1.28-5.25-5.69 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.15 1.18a10.96 10.96 0 0 1 2.87-.39c.97 0 1.95.13 2.87.39 2.19-1.49 3.15-1.18 3.15-1.18.62 1.58.23 2.75.11 3.04.74.81 1.18 1.84 1.18 3.1 0 4.42-2.7 5.4-5.27 5.68.41.36.77 1.08.77 2.17 0 1.57-.01 2.84-.01 3.23 0 .31.21.68.8.56C20.71 21.39 24 17.08 24 12 24 5.73 18.27.5 12 .5z"/>
+                                        </svg>
+                                        <span class="hidden sm:inline">GitHub</span>
+                                        <span class="sm:hidden">GitHub</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção em formato de linha do tempo com formação e cursos. -->
+        <section id="formacao" class="w-full py-24 bg-white/[0.02] border-y border-white/5 relative scroll-mt-16">
+            <div class="max-w-4xl mx-auto px-6 space-y-12">
+                <div class="flex items-center gap-4 fade-in">
+                    <div class="w-8 h-[2px] bg-[#F09F38]"></div>
+                    <h2 class="text-3xl font-bold tracking-wide uppercase text-white">Formação e Cursos</h2>
+                </div>
+
+                <!-- Bloco vertical com pontos de destaque conectados por uma linha. -->
+                <div class="relative border-l-2 border-white/10 ml-4 md:ml-6 space-y-8 pl-8 md:pl-10 fade-in">
+                    <div class="relative group">
+                        <div class="absolute -left-[41px] md:-left-[49px] top-3 bg-[#0B0B0F] border-2 border-[#F09F38] w-5 h-5 rounded-full group-hover:bg-[#F09F38] group-hover:scale-125 transition-all duration-300 shadow-[0_0_10px_rgba(240,159,56,0.3)]"></div>
+                        <div class="p-6 bg-[#0B0B0F] border border-white/5 rounded-2xl flex flex-col md:flex-row items-start gap-6 hover:border-[#F09F38]/30 transition shadow-lg">
+                            <div class="p-4 bg-white/5 rounded-xl text-[#F09F38] shrink-0">
+                                <i data-lucide="graduation-cap" class="w-7 h-7"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-white text-xl transition duration-300 group-hover:text-[#F09F38] mb-2"><a href="https://drive.google.com/file/d/1JSnit9LJ3baYC0WYD_wb7hOUGHDV35xA/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="hover:underline">Graduação em Análise e Desenvolvimento de Sistemas - FAMETRO</a></h3>
+                                <p class="text-slate-400 leading-relaxed">Formação sólida voltada para a arquitetura de soluções tecnológicas, com ênfase em modelagem e gerenciamento de bancos de dados relacionais, lógica estruturada e otimização de processos. Desenvolvi uma visão de ponta a ponta sobre o ciclo de vida dos dados dentro de sistemas corporativos.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="relative group">
+                        <div class="absolute -left-[41px] md:-left-[49px] top-3 bg-[#0B0B0F] border-2 border-[#F09F38] w-5 h-5 rounded-full group-hover:bg-[#F09F38] group-hover:scale-125 transition-all duration-300 shadow-[0_0_10px_rgba(240,159,56,0.3)]"></div>
+                        <div class="p-6 bg-[#0B0B0F] border border-white/5 rounded-2xl flex flex-col md:flex-row items-start gap-6 hover:border-[#F09F38]/30 transition shadow-lg">
+                            <div class="p-4 bg-white/5 rounded-xl text-[#F09F38] shrink-0">
+                                <i data-lucide="award" class="w-7 h-7"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-white text-xl transition duration-300 group-hover:text-[#F09F38] mb-2"><a href="https://www.credly.com/badges/e864f7b4-b35f-4fbe-bfef-42dd02e562c7/public_url" target="_blank" rel="noopener noreferrer" class="hover:underline">Especialização em Análise de Dados - Google</a></h3>
+                                <p class="text-slate-400 leading-relaxed">Especialização prática voltada para todo o ecossistema de análise de dados. Capacitação no processo completo de tomada de decisão baseada em dados, cobrindo desde a extração e limpeza com SQL, programação voltada para análise, até a criação de dashboards de alto impacto para traduzir dados complexos em insights acionáveis.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="relative group">
+                        <div class="absolute -left-[41px] md:-left-[49px] top-3 bg-[#0B0B0F] border-2 border-[#F09F38] w-5 h-5 rounded-full group-hover:bg-[#F09F38] group-hover:scale-125 transition-all duration-300 shadow-[0_0_10px_rgba(240,159,56,0.3)]"></div>
+                        <div class="p-6 bg-[#0B0B0F] border border-white/5 rounded-2xl flex flex-col md:flex-row items-start gap-6 hover:border-[#F09F38]/30 transition shadow-lg">
+                            <div class="p-4 bg-white/5 rounded-xl text-[#F09F38] shrink-0">
+                                <i data-lucide="shield-check" class="w-7 h-7"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-white text-xl transition duration-300 group-hover:text-[#F09F38] mb-2">Preparatório Técnico Certificações</h3>
+                                <p class="text-slate-400 leading-relaxed">Trilha de estudos ativa direcionada para os exames oficiais <span class="text-white font-medium">PL-300 (Microsoft Power BI Data Analyst)</span>.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção final de contato com CTA principal e rede social. -->
+        <section id="contato" class="w-full py-24 bg-[#0B0B0F] relative scroll-mt-16">
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl h-64 bg-[#F09F38]/5 blur-[120px] rounded-full pointer-events-none"></div>
+
+            <div class="max-w-4xl mx-auto px-6 fade-in">
+                <div class="p-10 md:p-16 bg-white/[0.02] border border-white/10 rounded-[2.5rem] text-center space-y-8 relative overflow-hidden backdrop-blur-xl shadow-2xl">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#F09F38] to-transparent opacity-50"></div>
+                    
+                    <div class="space-y-4 relative z-10">
+                        <h2 class="text-4xl md:text-5xl font-extrabold text-white tracking-tight">Vamos conversar?</h2>
+                        <p class="text-slate-400 max-w-lg mx-auto text-lg">Estou aberto a novos desafios profissionais em Análise de Dados, BI e posições de DBA Júnior.</p>
+                    </div>
+                    
+                    <div class="flex flex-col sm:flex-row gap-5 justify-center items-center pt-4 relative z-10">
+                        <a href="mailto:yancfgomes@gmail.com" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#F09F38] text-black px-8 py-4 rounded-full font-bold hover:bg-[#F5B461] hover:-translate-y-1 transition-all duration-300 shadow-[0_10px_20px_rgba(240,159,56,0.2)]">
+                            <i data-lucide="mail" class="w-5 h-5"></i>
+                            Me mande um E-mail
+                        </a>
+
+                        <a href="https://www.linkedin.com/in/yancfgomes/" target="_blank" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#0B0B0F] border border-white/10 hover:border-[#F09F38]/50 px-8 py-4 rounded-full font-bold text-white hover:-translate-y-1 transition-all duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#F09F38]"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                            LinkedIn
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Rodapé com direitos autorais e crédito de construção. -->
+    <footer class="w-full bg-[#0B0B0F] border-t border-white/5 py-10">
+        <div class="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-slate-500 font-medium">
+            <p>&copy; 2026 Yan Fernandes. Todos os direitos reservados.</p>
+            <p class="flex items-center gap-1.5">
+                Desenvolvido com <i data-lucide="code" class="w-4 h-4 text-slate-400"></i> e Tailwind CSS
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+
+    <script>
+        // Referências dos elementos que serão manipulados pelo JavaScript.
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+        const iconMenu = document.getElementById('icon-menu');
+        const iconX = document.getElementById('icon-x');
+        const header = document.getElementById('main-header');
+        let isMenuOpen = false;
+
+        // Alterna o estado do menu mobile e sincroniza a interface.
+        function toggleMenu() {
+            isMenuOpen = !isMenuOpen;
+            if (isMenuOpen) {
+                // Abre o menu e impede o scroll da página ao fundo.
+                mobileMenu.classList.remove('opacity-0', 'pointer-events-none');
+                mobileMenu.classList.add('opacity-100', 'pointer-events-auto');
+                document.body.style.overflow = 'hidden'; // Evita scroll atrás do menu
+                
+                // Deixa o cabeçalho mais sólido para manter contraste.
+                header.classList.add('bg-[#0B0B0F]');
+                header.classList.remove('bg-[#0B0B0F]/80', 'backdrop-blur-xl');
+                
+                // Mostra o ícone de fechar e esconde o menu.
+                iconMenu.classList.add('hidden');
+                iconX.classList.remove('hidden');
+            } else {
+                // Fecha o menu e restaura a rolagem normal.
+                mobileMenu.classList.add('opacity-0', 'pointer-events-none');
+                mobileMenu.classList.remove('opacity-100', 'pointer-events-auto');
+                document.body.style.overflow = '';
+                
+                // Retorna o estilo translúcido do cabeçalho.
+                header.classList.remove('bg-[#0B0B0F]');
+                header.classList.add('bg-[#0B0B0F]/80', 'backdrop-blur-xl');
+                
+                // Reaplica o estado correto caso a página já esteja rolada.
+                if (window.scrollY > 20) {
+                    header.classList.add('bg-[#0B0B0F]/90', 'backdrop-blur-xl', 'shadow-lg');
+                    header.classList.remove('bg-[#0B0B0F]/80');
+                }
+
+                // Restaura o ícone de menu.
+                iconX.classList.add('hidden');
+                iconMenu.classList.remove('hidden');
+            }
+        }
+
+        // Fecha o menu automaticamente ao clicar em qualquer link do menu mobile.
+        mobileMenuBtn.addEventListener('click', toggleMenu);
+        mobileLinks.forEach(link => link.addEventListener('click', () => {
+            if(isMenuOpen) toggleMenu();
+        }));
+
+        // Ajusta a aparência do cabeçalho conforme a posição da rolagem.
+        window.addEventListener('scroll', () => {
+            if(isMenuOpen) return; // Nao muda fundo se menu estiver aberto
+            
+            if (window.scrollY > 20) {
+                header.classList.add('bg-[#0B0B0F]/90', 'backdrop-blur-xl', 'shadow-lg');
+                header.classList.remove('bg-[#0B0B0F]/80');
+            } else {
+                header.classList.remove('bg-[#0B0B0F]/90', 'backdrop-blur-xl', 'shadow-lg');
+                header.classList.add('bg-[#0B0B0F]/80');
+            }
+        });
+
+        // Observa os elementos com fade-in e ativa a animação quando entram na tela.
+        (function(){
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            const items = document.querySelectorAll('.fade-in');
+            if (!items.length) return;
+
+            const io = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in-view');
+                        obs.unobserve(entry.target);
+                    }
+                });
+            }, { root: null, rootMargin: '0px 0px -100px 0px', threshold: 0.1 });
+
+            items.forEach(el => io.observe(el));
+        })();
+    </script>
+</body>
+</html>
